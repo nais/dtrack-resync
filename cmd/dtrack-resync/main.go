@@ -3,13 +3,14 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/joho/godotenv"
-	"github.com/nais/dependencytrack/pkg/client"
 	"os"
 	"os/signal"
 	"strings"
 	"syscall"
 	"time"
+
+	"github.com/joho/godotenv"
+	"github.com/nais/dependencytrack/pkg/client"
 
 	"github.com/sirupsen/logrus"
 )

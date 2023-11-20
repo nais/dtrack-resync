@@ -1,0 +1,9 @@
+test: check fmt vet
+	go test ./... -coverprofile cover.out -short
+fmt:
+	go run mvdan.cc/gofumpt -w ./
+vet:
+	go vet ./...
+check:
+	go run honnef.co/go/tools/cmd/staticcheck ./...
+	go run golang.org/x/vuln/cmd/govulncheck ./...
