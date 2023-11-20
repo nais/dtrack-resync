@@ -1,0 +1,25 @@
+environmentKinds:
+  - management
+dependencies:
+  - allOf:
+      - dependencytrack
+values:
+  resync.enabled:
+    displayName: Resync enabled
+    config:
+      type: bool
+    computed:
+      template: "true"
+  resync.password:
+    displayName: Resync password
+    config:
+      type: string
+      secret: true
+    computed:
+      template: '{{.Management.dtrack_resync_dependencytrack_password | quote}}'
+    resync.schedule:
+      displayName: Resync schedule
+      config:
+        type: string
+      computed:
+        template: '"0 0 * * *"' # every day at midnight

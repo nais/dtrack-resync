@@ -1,0 +1,7 @@
+apiVersion: v2
+name: drack-resync
+sources:
+  - https://github.com/nais/drack-resync/tree/main/charts
+description: A job to resync dependencytrack data
+type: application
+version: 0.0.1

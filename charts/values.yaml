@@ -1,0 +1,7 @@
+resync:
+  image:
+    name: dptrack-resync
+    repository: europe-north1-docker.pkg.dev/nais-io/nais/images
+    tag: yolo
+  password: todo
+  schedule: "0 0 * * *"
