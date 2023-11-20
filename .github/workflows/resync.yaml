@@ -31,7 +31,6 @@ jobs:
         id: build-push-sign
         with:
           name: ${{ env.NAME }}
-          file: Dockerfile
           google_service_account: gh-${{ env.NAME }}
           workload_identity_provider: ${{ secrets.NAIS_IO_WORKLOAD_IDENTITY_PROVIDER }}
           push: true

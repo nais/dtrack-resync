@@ -10,11 +10,11 @@ WORKDIR /src
 COPY go.mod .
 COPY go.sum .
 RUN go mod download
-RUN go build -a -installsuffix cgo -o /bin/resync cmd/resync/main.go
+RUN go build -a -installsuffix cgo -o /bin/dtrack-resync cmd/dtrack-resync/main.go
 
 FROM alpine:3
 RUN export PATH=$PATH:/app
 WORKDIR /app
-COPY --from=builder /bin/resync /app/resync
+COPY --from=builder /bin/dtrack-resync /app/dtrack-resync
 
-ENTRYPOINT ["/app/resync"]
+ENTRYPOINT ["/app/dtrack-resync"]

@@ -1,4 +1,4 @@
-package dtrack_resync
+package main
 
 import (
 	"context"
