@@ -7,8 +7,6 @@ ENV GO111MODULE=on
 RUN go version
 COPY . /src
 WORKDIR /src
-COPY go.mod .
-COPY go.sum .
 RUN go mod download
 RUN go build -a -installsuffix cgo -o /bin/dtrack-resync cmd/dtrack-resync/main.go
 
