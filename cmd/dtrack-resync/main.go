@@ -26,7 +26,7 @@ type Config struct {
 }
 
 func init() {
-	flag.StringVar(&cfg.LogLevel, "log-level", cfg.LogLevel, "which log level to use, default 'info'")
+	flag.StringVar(&cfg.LogLevel, "log-level", cfg.LogLevel, "which log level to use, default 'debug'")
 	flag.StringVar(&cfg.BaseUrl, "base-url", "http://localhost:9001", "base url of dependencytrack")
 	flag.StringVar(&cfg.Password, "password", cfg.Password, "password for application")
 }

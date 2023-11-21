@@ -3,5 +3,7 @@ resync:
     name: dtrack-resync
     repository: europe-north1-docker.pkg.dev/nais-io/nais/images
     tag: yolo
+  logLevel: INFO
+  baseUrl: http://dependencytrack-backend:8080
   password: todo
   schedule: "0 0 * * *"
