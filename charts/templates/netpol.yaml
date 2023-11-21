@@ -10,6 +10,7 @@ spec:
               app.kubernetes.io/name: dependencytrack
   podSelector:
     matchLabels:
-      {{- include "dtrack-job.selectorLabels" . | nindent 4 }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: {{ .Release.Name }}
   policyTypes:
     - Egress

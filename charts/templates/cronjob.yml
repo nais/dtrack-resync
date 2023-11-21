@@ -4,19 +4,18 @@ kind: CronJob
 metadata:
   name: {{ .Release.Name | quote }}
   labels:
-    {{- include "dtrack-job.labels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ .Release.Name | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
 spec:
   schedule: {{ .Values.resync.schedule | quote }}
   jobTemplate:
-    metadata:
-      labels:
-        {{- include "dtrack-job.labels" . | nindent 8 }}
     spec:
       ttlSecondsAfterFinished: 300
       template:
         metadata:
           labels:
-            {{- include "dtrack-job.labels" . | nindent 8 }}
+            app.kubernetes.io/name: {{ .Release.Name | quote }}
+            app.kubernetes.io/instance: {{ .Release.Name | quote }}
         spec:
           containers:
             - name: {{ .Release.Name | quote }}
