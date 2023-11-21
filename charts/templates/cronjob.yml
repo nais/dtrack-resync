@@ -48,9 +48,7 @@ kind: Secret
 metadata:
   name: "{{ .Release.Name }}-pwd"
   labels:
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-    app.kubernetes.io/instance: {{ .Release.Name | quote }}
-    app.kubernetes.io/name: {{ .Release.Name | quote }}
+    {{- include "dtrack-job.labels" . | nindent 4 }}
 type: Opaque
 stringData:
   ADMIN_PASSWORD: {{ .Values.resync.password | quote }}
