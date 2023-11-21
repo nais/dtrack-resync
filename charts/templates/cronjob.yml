@@ -12,6 +12,7 @@ spec:
   schedule: {{ .Values.resync.schedule | quote }}
   jobTemplate:
     spec:
+      ttlSecondsAfterFinished: 300
       template:
         spec:
           containers:
@@ -36,6 +37,8 @@ spec:
                     name: "{{ .Release.Name }}-resync-pwd"
           restartPolicy: Never
           securityContext:
+            seccompProfile:
+              type: RuntimeDefault
             runAsUser: 1000
             runAsGroup: 1000
             fsGroup: 1000
