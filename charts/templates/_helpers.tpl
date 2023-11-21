@@ -1,17 +1,9 @@
 {{/*
 Expand the name of the chart.
 */}}
+
 {{- define "dtrack-job.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-
-{{- define "dtrack-job-backend.name" -}}
-{{- .Chart.Name }}-backend
-{{- end }}
-
-{{- define "dtrack-job-frontend.name" -}}
-{{- .Chart.Name }}-frontend
+{{- .Chart.Name }}
 {{- end }}
 
 {{/*
@@ -42,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "dtrack-job-backend.labels" -}}
+{{- define "dtrack-job.labels" -}}
 helm.sh/chart: {{ include "dtrack-job.chart" . }}
-{{ include "dtrack-job-backend.selectorLabels" . }}
+{{ include "dtrack-job.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -52,40 +44,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Common labels
+Selector labels for job
 */}}
-{{- define "dtrack-job-frontend.labels" -}}
-helm.sh/chart: {{ include "dtrack-job.chart" . }}
-{{ include "dtrack-job-frontend.selectorLabels" . }}
-{{- if .Chart.Version }}
-app.kubernetes.io/version: {{ .Chart.Version | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels for backend
-*/}}
-{{- define "dtrack-job-backend.selectorLabels" -}}
+{{- define "dtrack-job.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "dtrack-job.name" . }}
-app.kubernetes.io/instance: {{ include "dtrack-job-backend.name" . }}
-{{- end }}
-
-{{/*
-Selector labels for frontend
-*/}}
-{{- define "dtrack-job-frontend.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "dtrack-job.name" . }}
-app.kubernetes.io/instance: {{ include "dtrack-job-frontend.name" . }}
-{{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "dtrack-job.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "dtrack-job.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
+app.kubernetes.io/instance: {{ include "dtrack-job.name" . }}
 {{- end }}

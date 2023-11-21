@@ -2,21 +2,21 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: "{{ .Release.Name }}-resync"
+  name: {{ .Release.Name | quote }}
   labels:
-    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-    app.kubernetes.io/instance: "{{ .Release.Name }}-resync"
-    app.kubernetes.io/name: {{ .Release.Name | quote }}
-    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    {{- include "dtrack-job.labels" . | nindent 4 }}
 spec:
   schedule: {{ .Values.resync.schedule | quote }}
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: 300
       template:
+        metadata:
+          labels:
+            {{- include "dtrack-job.labels" . | nindent 8 }}
         spec:
           containers:
-            - name: "{{ .Release.Name }}-resync"
+            - name: {{ .Release.Name | quote }}
               image: "{{ .Values.resync.image.repository }}/{{ .Values.resync.image.name }}:{{ .Values.resync.image.tag }}"
               securityContext:
                 runAsNonRoot: true
@@ -34,7 +34,7 @@ spec:
                   value: "{{ .Values.resync.baseUrl }}"
               envFrom:
                 - secretRef:
-                    name: "{{ .Release.Name }}-resync-pwd"
+                    name: "{{ .Release.Name }}-pwd"
           restartPolicy: Never
           securityContext:
             seccompProfile:
@@ -46,10 +46,10 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: "{{ .Release.Name }}-resync-pwd"
+  name: "{{ .Release.Name }}-pwd"
   labels:
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-    app.kubernetes.io/instance: "{{ .Release.Name }}-resync"
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
     app.kubernetes.io/name: {{ .Release.Name | quote }}
 type: Opaque
 stringData:

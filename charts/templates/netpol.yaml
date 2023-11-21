@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: "{{ .Release.Name }}"
+spec:
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: dependencytrack
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: "{{ .Release.Name }}"
+  policyTypes:
+    - Egress
