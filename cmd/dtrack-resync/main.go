@@ -35,7 +35,6 @@ func init() {
 
 func main() {
 	parseFlags()
-
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 	defer cancel()
 
@@ -52,17 +51,23 @@ func main() {
 	)
 
 	projects, err := c.GetProjects(ctx)
-	log.Debugf("number of projects to re-analyze: %v", len(projects))
+	log.Infof("number of projects to re-analyze: %v", len(projects))
 	if err != nil {
 		log.Fatalf("get projects: %v", err)
 	}
 
+	var projectlog string
+	now := time.Now()
 	for _, project := range projects {
 		if err = c.TriggerAnalysis(ctx, project.Uuid); err != nil {
 			log.Errorf("trigger analysis: %v", err)
 		}
+		projectlog += "Updated project: " + project.Name + "\n"
 	}
-	log.Println("sync complete")
+
+	log.Infof(projectlog)
+	log.Infof("Syncing time: %v\n", time.Since(now))
+	log.Info("sync complete")
 }
 
 func parseFlags() {
