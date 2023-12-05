@@ -56,5 +56,5 @@ metadata:
     {{- include "dtrack-job.labels" . | nindent 4 }}
 type: Opaque
 stringData:
-  ADMIN_PASSWORD: {{ .Values.resync.password | quote }}
+  PASSWORD: {{ .Values.resync.password | quote }}
   {{- end }}
