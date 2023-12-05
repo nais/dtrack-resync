@@ -17,9 +17,15 @@ values:
       secret: true
     computed:
       template: '{{.Management.dtrack_resync_dependencytrack_password | quote}}'
-    resync.schedule:
-      displayName: Resync schedule
-      config:
-        type: string
-      computed:
-        template: '"0 0 * * *"' # every day at midnight
+  resync.username:
+    displayName: Resync username
+    config:
+      type: string
+    computed:
+      template: 'dtrack-resync'
+  resync.schedule:
+    displayName: Resync schedule
+    config:
+      type: string
+    computed:
+      template: '"0 0 * * *"' # every day at midnight
