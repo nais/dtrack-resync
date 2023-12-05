@@ -6,6 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Release.Name | quote }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app: "{{ .Release.Name }}"
 spec:
   schedule: {{ .Values.resync.schedule | quote }}
   jobTemplate:
@@ -16,6 +17,7 @@ spec:
           labels:
             app.kubernetes.io/name: {{ .Release.Name | quote }}
             app.kubernetes.io/instance: {{ .Release.Name | quote }}
+            app: "{{ .Release.Name }}"
         spec:
           containers:
             - name: {{ .Release.Name | quote }}
@@ -50,6 +52,7 @@ kind: Secret
 metadata:
   name: "{{ .Release.Name }}-pwd"
   labels:
+    app: "{{ .Release.Name }}"
     {{- include "dtrack-job.labels" . | nindent 4 }}
 type: Opaque
 stringData:
