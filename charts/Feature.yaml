@@ -28,4 +28,4 @@ values:
     config:
       type: string
     computed:
-      template: '"0 0 * * *"' # every day at midnight
+      template: '"0 2 * * *"' # every day at 02:00
