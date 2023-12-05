@@ -7,4 +7,5 @@ resync:
   logLevel: INFO
   baseUrl: http://dependencytrack-backend:8080
   password: todo
+  username: dtrack-resync
   schedule: "0 0 * * *"

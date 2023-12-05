@@ -20,7 +20,8 @@ var cfg = &Config{
 }
 
 type Config struct {
-	Password string `json:"admin-password"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 	BaseUrl  string `json:"base-url"`
 	LogLevel string `json:"log-level"`
 }
@@ -29,6 +30,7 @@ func init() {
 	flag.StringVar(&cfg.LogLevel, "log-level", cfg.LogLevel, "which log level to use, default 'debug'")
 	flag.StringVar(&cfg.BaseUrl, "base-url", "http://localhost:9001", "base url of dependencytrack")
 	flag.StringVar(&cfg.Password, "password", cfg.Password, "password for application")
+	flag.StringVar(&cfg.Username, "username", "dtrack-resync", "username for application")
 }
 
 func main() {
@@ -44,7 +46,7 @@ func main() {
 
 	c := client.New(
 		cfg.BaseUrl,
-		"dtrack-resync",
+		cfg.Username,
 		cfg.Password,
 		client.WithLogger(log.WithField("system", "dtrack-resync")),
 	)
