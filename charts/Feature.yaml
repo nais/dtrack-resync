@@ -27,5 +27,3 @@ values:
     displayName: Resync schedule
     config:
       type: string
-    computed:
-      template: '"0 2 * * *"' # every day at 02:00
