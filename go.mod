@@ -6,7 +6,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/nais/dependencytrack v0.0.0-20231219000438-29ebb5ba4481
 	github.com/sirupsen/logrus v1.9.3
-	golang.org/x/vuln v1.0.2
+	golang.org/x/vuln v1.0.3
 	honnef.co/go/tools v0.4.6
 	mvdan.cc/gofumpt v0.6.0
 )
