@@ -1,12 +1,12 @@
 module github.com/nais/dtrack-resync
 
-go 1.21
+go 1.22.0
 
 require (
 	github.com/joho/godotenv v1.5.1
-	github.com/nais/dependencytrack v0.0.0-20231219000438-29ebb5ba4481
+	github.com/nais/dependencytrack v0.0.0-20240212045319-10e523c017ff
 	github.com/sirupsen/logrus v1.9.3
-	golang.org/x/vuln v1.0.3
+	golang.org/x/vuln v1.0.4
 	honnef.co/go/tools v0.4.6
 	mvdan.cc/gofumpt v0.6.0
 )
@@ -23,7 +23,7 @@ require (
 	github.com/lestrrat-go/jwx/v2 v2.0.19 // indirect
 	github.com/lestrrat-go/option v1.0.1 // indirect
 	github.com/segmentio/asm v1.2.0 // indirect
-	golang.org/x/crypto v0.17.0 // indirect
+	golang.org/x/crypto v0.18.0 // indirect
 	golang.org/x/exp/typeparams v0.0.0-20221208152030-732eee02a75a // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect

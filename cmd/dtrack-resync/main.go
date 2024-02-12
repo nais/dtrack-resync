@@ -58,7 +58,7 @@ func main() {
 	}
 
 	now := time.Now()
-	var projectLog = triggerProjectAnalysis(ctx, c, projects, log)
+	projectLog := triggerProjectAnalysis(ctx, c, projects, log)
 	log.Infof(projectLog)
 	log.Infof("Syncing time: %v\n", time.Since(now))
 	log.Info("sync complete")
