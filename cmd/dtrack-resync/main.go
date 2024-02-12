@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 
@@ -56,18 +57,28 @@ func main() {
 		log.Fatalf("get projects: %v", err)
 	}
 
-	var projectlog string
 	now := time.Now()
-	for _, project := range projects {
-		if err = c.TriggerAnalysis(ctx, project.Uuid); err != nil {
-			log.Errorf("trigger analysis: %v", err)
-		}
-		projectlog += "Updated project: " + project.Name + "\n"
-	}
-
-	log.Infof(projectlog)
+	var projectLog = triggerProjectAnalysis(ctx, c, projects, log)
+	log.Infof(projectLog)
 	log.Infof("Syncing time: %v\n", time.Since(now))
 	log.Info("sync complete")
+}
+
+func triggerProjectAnalysis(ctx context.Context, c client.Client, projects []*client.Project, log *logrus.Logger) string {
+	var wg sync.WaitGroup
+	var projectAnalysisLog string
+	for _, project := range projects {
+		wg.Add(1)
+		go func(project *client.Project) {
+			defer wg.Done() // Decrease the counter when the goroutine completes.
+			if err := c.TriggerAnalysis(ctx, project.Uuid); err != nil {
+				log.Errorf("trigger analysis: %v", err)
+			}
+			projectAnalysisLog += "Updated project metrics: " + project.Name + "\n"
+		}(project)
+	}
+	wg.Wait()
+	return projectAnalysisLog
 }
 
 func parseFlags() {
