@@ -56,16 +56,16 @@ func main() {
 		log.Fatalf("get projects: %v", err)
 	}
 
-	projectlogs := ""
+	var projectlog string
 	now := time.Now()
 	for _, project := range projects {
 		if err = c.TriggerAnalysis(ctx, project.Uuid); err != nil {
 			log.Errorf("trigger analysis: %v", err)
 		}
-		projectlogs += "Updated project: " + project.Name + "\n"
+		projectlog += "Updated project: " + project.Name + "\n"
 	}
 
-	log.Infof(projectlogs)
+	log.Infof(projectlog)
 	log.Infof("Syncing time: %v\n", time.Since(now))
 	log.Info("sync complete")
 }
