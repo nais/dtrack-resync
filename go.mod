@@ -7,7 +7,7 @@ require (
 	github.com/nais/dependencytrack v0.0.0-20240212045319-10e523c017ff
 	github.com/sirupsen/logrus v1.9.3
 	golang.org/x/vuln v1.0.4
-	honnef.co/go/tools v0.4.6
+	honnef.co/go/tools v0.4.7
 	mvdan.cc/gofumpt v0.6.0
 )
 
